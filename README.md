@@ -1,6 +1,6 @@
-## 🦁 LEO-vetter: for Lazy Exoplanet Operations ##
+## 🦁 LEO-Vetter: for Lazy Exoplanet Operations ##
 
-LEO-vetter is a tool for automated vetting of transit signals found in light curve data. Inspired by the Kepler Robovetter, LEO computes vetting metrics and then checks those metrics against a series of pass-fail thresholds. If a signal passes all checks, it is considered a planet candidate (PC). If a signal fails at least one test, it may be either an astrophysical false positive (FP; e.g. eclipsing binary, nearby eclipsing signal) or false alarm (FA; e.g. systematic, stellar variability). LEO also produces vetting reports for quick manual inspection of the signal.
+LEO-Vetter (the Lazy-Exoplanet-Operations Vetter) is a tool for automated vetting of transit signals found in light curve data. Inspired by the Kepler Robovetter, LEO-Vetter computes vetting metrics and then checks those metrics against a series of pass-fail thresholds. If a signal passes all checks, it is considered a planet candidate (PC). If a signal fails at least one test, it may be either an astrophysical false positive (FP; e.g. eclipsing binary, nearby eclipsing signal) or false alarm (FA; e.g. systematic, stellar variability). LEO-Vetter also produces vetting reports for quick manual inspection of the signal.
 
 Flux-level vetting can work on light curves from any source, including (but not limited to) Kepler, K2, and TESS. Pixel-level vetting has been implemented for TESS usage only.
 
@@ -46,8 +46,8 @@ cd transit-diffImage
 pip install .
 ```
 
-### Citing LEO ###
+### Citing LEO-Vetter ###
 
-Please cite [our paper](https://ui.adsabs.harvard.edu/abs/2025AJ....170..280K/abstract) if you find LEO-Vetter useful 😊
+Please cite [our paper](https://ui.adsabs.harvard.edu/abs/2025AJ....170..280K/abstract) if you find this package useful 😊
 
 Kunimoto, M., Bryson, S., Jaffee, D., et al. (2025) The Astronomical Journal, 170, 280
