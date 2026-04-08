@@ -27,7 +27,7 @@ setup(
     version=get_version("leo_vetter/__init__.py"),
     author="Michelle Kunimoto",
     author_email="michelle.kunimoto@gmail.com",
-    url="https://github.com/mkunimoto/LEO-vetter",
+    url="https://github.com/mkunimoto/LEO-Vetter",
     license="GPLv3",
     packages=["leo_vetter"],
     package_data={"leo_vetter": [
