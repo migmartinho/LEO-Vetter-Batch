@@ -104,18 +104,27 @@ class TCELightCurve:
             dep_SES[i] = self.zpt - weighted_mean(self.flux[left_idx:right_idx], self.flux_err[left_idx:right_idx])
             
             # Get overall transit depth at this cadence, i.e. use all datapoints close in phase
+            p = phase[i]
             
             # find indices within +- range from the current phase index
-            left_p  = np.searchsorted(phase_sorted, phase[i] - dur_per_frac_half, side='right')
-            right_p = np.searchsorted(phase_sorted, phase[i] + dur_per_frac_half, side='left')
+            left_p  = np.searchsorted(phase_sorted, p - dur_per_frac_half, side='right')
+            right_p = np.searchsorted(phase_sorted, p + dur_per_frac_half, side='left')
             idx_window = phase_sorted_idxs[left_p:right_p]
 
-            left_p_wrap  = np.searchsorted(phase_sorted, phase[i] - dur_per_frac_half + 1.0, side='right')
-            right_p_wrap = np.searchsorted(phase_sorted, phase[i] + dur_per_frac_half + 1.0, side='left')
-            idx_window_wrap = phase_sorted_idxs[left_p_wrap:right_p_wrap]
+            # handle phase wrapping
+            if p < dur_per_frac_half:
+                wrap = np.searchsorted(phase_sorted, p - dur_per_frac_half + 1.0, side='left')
+                idx_wrap = phase_sorted_idxs[wrap:]
+                all_tran_idxs = np.concatenate((idx_window, idx_wrap))
+            elif p > (1.0 - dur_per_frac_half):
+                wrap = np.searchsorted(phase_sorted, p + dur_per_frac_half - 1.0, side='right')
+                idx_wrap = phase_sorted_idxs[:wrap]
+                all_tran_idxs = np.concatenate((idx_window, idx_wrap))
+            else:
+                all_tran_idxs = idx_window
 
-            # combine the two windows
-            all_tran_idxs = np.concatenate((idx_window, idx_window_wrap))
+            # avoid possible duplicates
+            all_tran_idxs = np.unique(all_tran_idxs)
             
             n_MES[i] = len(all_tran_idxs)
             dep_MES[i] = self.zpt - weighted_mean(self.flux[all_tran_idxs], self.flux_err[all_tran_idxs])
